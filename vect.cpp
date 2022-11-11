@@ -1,7 +1,5 @@
 #include <cmath>
-
 #include "vect.h"
-
 using std::sqrt;
 using std::sin;
 using std::cos;
@@ -11,27 +9,27 @@ using std::cout;
 
 namespace VECTOR{
     const double Rad_to_deg = 45.0 / atan(1.0); //弧度角度转换
-    void Vector :: set_ang(){
+    double Vector :: set_ang() const{
         if (x == 0.0 && y == 0.0)
-            ang = 0;
+            return 0;
         else
-            ang = atan2(y, x);
+            return atan2(y, x);
     }
 
-    void Vector :: set_mag(){
-        mag = sqrt(x * x + y * y);
+    double Vector :: set_mag() const{
+        return sqrt(x * x + y * y);
     }
 
-    void Vector :: set_x(){
+    void Vector :: set_x(double mag, double ang){
         x = mag * cos(ang);
     }
 
-    void Vector :: set_y(){
+    void Vector :: set_y(double mag, double ang){
         y = mag * sin(ang);
     }
     //默认构造函数
     Vector :: Vector(){
-        x = y = mag = ang = 0.0;
+        x = y = 0.0;
         mode = RECT;
     }
     
@@ -44,15 +42,13 @@ namespace VECTOR{
             set_ang();
         }
         else if (form == POL){
-            mag = n1;
-            ang = n2;
-            set_x();
-            set_y();
+            set_x(n1, n2);
+            set_y(n1, n2);
         }
         else{
             cout << "Incorrect 3rd argument to Vector() --";
             cout << "vector set to 0\n";
-            x =y = mag = ang = 0.0;
+            x = y =  0.0;
             mode = RECT;
         }
     }
@@ -66,15 +62,14 @@ namespace VECTOR{
             set_ang();
         }
         else if (form == POL){
-            mag = n1;
-            ang = n2;
-            set_x();
-            set_y();
+  
+            set_x(n1, n2);
+            set_y(n1, n2);
         }
         else{
             cout << "Incorrect 3rd argument to Vector() --";
             cout << "vector set to 0\n";
-            x =y = mag = ang = 0.0;
+            x = y = 0.0;
             mode = RECT;
         }
     }
@@ -109,11 +104,10 @@ namespace VECTOR{
     }
 
     std::ostream & operator<<(std::ostream & os, const Vector & v){
-
         if (v.mode == Vector::RECT)
             os << "(x,y) = (" << v.x <<  ", " << v.y <<")";
         else if (v.mode == Vector::POL){
-            os << "(m,a) = (" << v.mag << "," << v.ang * Rad_to_deg << ")";
+            os << "(m,a) = (" << v.magval() << "," << v.angval()* Rad_to_deg << ")";
         }
         else
             os << "Vector object mode is invalid";
