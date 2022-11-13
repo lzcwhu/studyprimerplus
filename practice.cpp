@@ -1,47 +1,23 @@
 #include <iostream>
-using std::cout;
-#include "stonewt.h"
+using namespace std;
+#include "complex0.h"
 
 
 int main()
 {
-    using std::cout;
-    using std::endl;
-    using std::cin;
-    Stonewt sw[6] = {Stonewt(285.7), Stonewt(21, 8), Stonewt(12.0)};
-    Stonewt temp(11.0);
-    Stonewt min, max;
-    double val;
-    int count;
-    for (int i = 3; i < 6; i++){
-        while(!(cin >> val)){
-            cin.clear();
-            while (cin.get() != '\n')
-                continue;
-            cout << "Illegal input! Enter an number: ";
-        }
-        sw[i] = Stonewt(val);
+    Complex a(3.0, 4.0);
+    Complex c;
+    cout << "Enter a complex num (q to quit)" << endl;
+    while (cin >> c){
+        cout << "c is " << c << '\n';
+        cout << "a is " << a << '\n';
+        cout << "a + c is " << a + c << '\n';
+        cout << "a - c is " << a - c << '\n';
+        cout << "a * c is " << a * c << '\n';
+        cout << "2 * c is " << c * 2 << '\n';
+        cout << "Enter a complex number (q to quit):\n";
     }
-    min = max = sw[0];
-    for (int i = 0; i < 6; i++)
-    {
-        if (sw[i] < min)
-        {
-            min = sw[i];
-        }
-        if (max < sw[i])
-        {
-            max = sw[i];
-        }
-        if (temp <= sw[i])
-        {
-            ++count;
-        }
-    }
-    cout << "The minimum pounds are: " << min;
-    cout << "The maximum pounds are: " << max;
-    cout << "There are " << count << " elements more than 11 pounds." << endl;
-
+    cout << "Done!\n";
    
     return 0;
 
