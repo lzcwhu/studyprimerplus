@@ -1,31 +1,31 @@
 #include <iostream>
 using namespace std;
-#include "stock20.h"
+#include "stack.h"
 
-const int STKS = 4;
 int main()
 {
 
-    Stock stocks[STKS] = 
-    {
-        Stock("NanoSmart", 12, 20.0),
-        Stock("Boffo Objects", 200, 2.0),
-        Stock("Monolithic Obelisks", 130, 3.25),
-        Stock("Fleep Enterprises", 60, 6.5)
-    };
-
-    std::cout << "Stock holdings:\n";
-    for (int st = 0; st < STKS; st++)
-    {
-        std::cout << stocks[st] << std::endl;
-    }
-    const Stock *top = &stocks[0];
-    for (int st = 1; st < STKS; st++)
-    {
-        top = &top->topval(stocks[st]);
-    }
-    std::cout << "\nMost valuable holding:\n";
-    std::cout << *top;
+    using namespace std;
+    Stack st;
+    Item temp = 1000UL;
+    st.push(temp);
+    temp = 2000UL;
+    st.push(temp);
+    temp = 3000UL;
+    Item s = 1000UL;
+    st.push(temp);
+    Stack st1(st);
+    Stack st2;
+    st2 = st1;
+    st2.pop(s);
+    cout << "Here are some stack contents:" << endl;
+    cout << "Stack st:" << endl;
+    cout << st;
+    cout << "Stack st1:" << endl;
+    cout << st1;
+    cout << "Stack st2:" << endl;
+    cout << st2;
+    cout << "Bye\n";
     return 0;
 
 
