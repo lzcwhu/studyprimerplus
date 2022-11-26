@@ -1,32 +1,30 @@
 #include <iostream>
+#include "CD.h"
 using namespace std;
-#include "stack.h"
 
+void Bravo(const Cd &disk);
 int main()
 {
-
-    using namespace std;
-    Stack st;
-    Item temp = 1000UL;
-    st.push(temp);
-    temp = 2000UL;
-    st.push(temp);
-    temp = 3000UL;
-    Item s = 1000UL;
-    st.push(temp);
-    Stack st1(st);
-    Stack st2;
-    st2 = st1;
-    st2.pop(s);
-    cout << "Here are some stack contents:" << endl;
-    cout << "Stack st:" << endl;
-    cout << st;
-    cout << "Stack st1:" << endl;
-    cout << st1;
-    cout << "Stack st2:" << endl;
-    cout << st2;
-    cout << "Bye\n";
+    Cd c1("Beatles", "Capitoal", 14, 35.5);
+    Classic c2 = Classic("Piano Sonata in B flat, Fantasia in C", "Alfred Brendel", " Philips", 2, 57.17);
+    Cd *pcd = &c1;
+    cout << "Using object directly:\n";
+    c1.Report();
+    c2.Report();
+    cout << "Using type cd * pointer to objects:\n";
+    pcd -> Report();
+    pcd = &c2;
+    pcd -> Report();
+    cout << "Calling a function with a Cd reference argument:\n";
+    Bravo(c1);
+    Bravo(c2);
+    cout << "Testing assignment:";
+    Classic copy;
+    copy = c2;
+    copy.Report();
     return 0;
+}
 
-
+void Bravo(const Cd &disk){
+    disk.Report();
 }
